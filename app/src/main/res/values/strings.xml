@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Relive Travel</string>
+    <!--  discription  -->
+    <string name="logo_discription">로고, Relive Travel, 여행을 추억하다</string>
+    <!--  button_name  -->
+    <string name="bt_nav_home">홈</string>
+    <string name="bt_nav_calendar">일정</string>
+    <string name="bt_nav_feed">피드</string>
+    <string name="bt_nav_add_travel">여행추가</string>
+    <string name="bt_nav_mypage">MY</string>
+
+    <string name="top_nav_search">프로필 검색</string>
+    <string name="top_nav_list">알람 리스트</string>
+</resources>

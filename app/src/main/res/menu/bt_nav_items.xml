@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bt_nav_home"
+        android:checked="true"
+        android:icon="@drawable/home"
+        android:title="@string/bt_nav_home" />
+    <item
+        android:id="@+id/bt_nav_calendar"
+        android:icon="@drawable/calendar"
+        android:title="@string/bt_nav_calendar" />
+    <item
+        android:id="@+id/bt_nav_feed"
+        android:icon="@drawable/feed"
+        android:title="@string/bt_nav_feed" />
+    <item
+        android:id="@+id/bt_nav_add_travel"
+        android:icon="@drawable/add"
+        android:title="@string/bt_nav_add_travel" />
+    <item
+        android:id="@+id/bt_nav_mypage"
+        android:icon="@drawable/mypage"
+        android:title="@string/bt_nav_mypage" />
+</menu>
