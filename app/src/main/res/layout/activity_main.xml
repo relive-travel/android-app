@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_action_bar"
@@ -20,6 +20,38 @@
             android:src="@drawable/logo_name"
             android:contentDescription="@string/logo_discription" />
     </androidx.appcompat.widget.Toolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="10"
+        app:layout_constraintBottom_toTopOf="@+id/bt_nav"
+        app:layout_constraintTop_toBottomOf="@+id/main_action_bar">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_profile_view"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:layout_margin="@dimen/common_margin"
+            android:orientation="horizontal"
+            tools:listitem="@layout/profile_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/interaction_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/common_margin"
+            android:layout_weight="8.5"/>
+
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bt_nav"

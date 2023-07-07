@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--  common  -->
+    <dimen name="common_margin">10dp</dimen>
+    <!--  navigation bar  -->
     <dimen name="nav_height">60dp</dimen>
     <dimen name="toolbar_title_size">180dp</dimen>
 </resources>
