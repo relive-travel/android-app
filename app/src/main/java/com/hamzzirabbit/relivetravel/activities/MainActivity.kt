@@ -109,8 +109,8 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == newMainActivityRequestCode && resultCode == Activity.RESULT_OK) {
             data?.let { item ->
-                val profileName = item.getStringExtra("name")
-                val profileDescription = item.getStringExtra("description")
+                val profileName = item.getStringExtra("profile_name")
+                val profileDescription = item.getStringExtra("profile_description")
 
                 profileListViewModel.insertProfile(profileName, profileDescription)
             }
