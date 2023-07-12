@@ -66,10 +66,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        /*----- navigation -----*/
-//        val interactionFragment = supportFragmentManager.findFragmentById(R.id.interaction_fragment) as NavHostFragment
-//        navController = interactionFragment.navController
-
         /*----- bottom navigation -----*/
         supportFragmentManager.beginTransaction().add(R.id.interaction_fragment, HomeFragment(), "home").commit()
         bottomNavigationView.setOnItemSelectedListener {
@@ -86,11 +82,14 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(R.id.interaction_fragment, FeedFragment(), "feed")
                     true
                 }
+                R.id.bt_nav_add_travel -> {
+                    true
+                }
+                R.id.bt_nav_mypage -> {
+                    true
+                }
                 else -> false
             }
-        }
-        bottomNavigationView.setOnItemReselectedListener {
-
         }
     }
 
@@ -101,21 +100,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun adapterOnClick(profile: Profile) {
-
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == newMainActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            data?.let { item ->
-                val profileName = item.getStringExtra("profile_name")
-                val profileDescription = item.getStringExtra("profile_description")
-
-                profileListViewModel.insertProfile(profileName, profileDescription)
+        val bundle = Bundle()
+        bundle.putLong("profile_id", profile.profile_id)
+        when(bottomNavigationView.selectedItemId) {
+            R.id.bt_nav_home -> {
+                val homeFragment = HomeFragment()
+                homeFragment.arguments = bundle
+                replaceFragment(R.id.interaction_fragment, homeFragment, "home")
+            }
+            R.id.bt_nav_calendar -> {
+                val calendarFragment = CalendarFragment()
+                calendarFragment.arguments = bundle
+                replaceFragment(R.id.interaction_fragment, calendarFragment, "calendar")
+            }
+            R.id.bt_nav_feed -> {
+                val feedFragment = FeedFragment()
+                feedFragment.arguments = bundle
+                replaceFragment(R.id.interaction_fragment, feedFragment, "feed")
             }
         }
     }
+
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == newMainActivityRequestCode && resultCode == Activity.RESULT_OK) {
+//            data?.let { item ->
+//                val profileName = item.getStringExtra("profile_name")
+//                val profileDescription = item.getStringExtra("profile_description")
+//
+//                profileListViewModel.insertProfile(profileName, profileDescription)
+//            }
+//        }
+//    }
 
     private fun replaceFragment(fragment_id: Int, fragment: Fragment, name: String) {
         supportFragmentManager.commit {
