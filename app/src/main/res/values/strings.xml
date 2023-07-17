@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Relive Travel</string>
     <!--  discription  -->
-    <string name="logo_discription">로고, Relive Travel, 여행을 추억하다</string>
+    <string name="description_logo">Relive Travel 로고</string>
+    <string name="description_google_map">구글 지도</string>
+    <string name="description_example_calendar_image">장소의 이미지</string>
     <!--  button_name  -->
     <string name="bt_nav_home">홈</string>
     <string name="bt_nav_calendar">일정</string>
@@ -11,4 +13,12 @@
 
     <string name="top_nav_search">프로필 검색</string>
     <string name="top_nav_list">알람 리스트</string>
+    <!--  example  -->
+    <string name="ex_calendar_title">부산 여행</string>
+    <string name="ex_calendar_order">3번째 일정</string>
+    <string name="ex_calendar_date">2023. 6. 3</string>
+    <string name="ex_calendar_place">서면 밀면</string>
+    <string name="ex_calendar_address">부산 부산진구</string>
+    <string name="ex_calendar_review">도착했는데 관광명소라기 보단, 노숙자의 성지같았다. 너무 많았음.\n몰상식한 도시로 보였음. 길에서는 담배를 아무렇지 않게 피고, 길거리는 더러움으로 가득찼으며, 노인이 많아 자기중심적인 사고에 갇혀사는것 같았음</string>
+
 </resources>

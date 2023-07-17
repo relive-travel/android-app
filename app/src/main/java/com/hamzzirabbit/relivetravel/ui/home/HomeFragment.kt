@@ -11,9 +11,8 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.hamzzirabbit.relivetravel.R
 import com.hamzzirabbit.relivetravel.databinding.FragmentHomeBinding
-import com.hamzzirabbit.relivetravel.datas.home.Home
-import com.hamzzirabbit.relivetravel.datas.home.homeList
 
 class HomeFragment: Fragment(), OnMapReadyCallback{
     private var _homeBinding: FragmentHomeBinding? = null
@@ -32,15 +31,10 @@ class HomeFragment: Fragment(), OnMapReadyCallback{
     ): View? {
         _homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        googleMapView = _homeBinding!!.homeGoogleMapView as MapView
+        googleMapView = _homeBinding?.homeGoogleMapView as MapView
         googleMapView.onCreate(savedInstanceState)
         googleMapView.getMapAsync(this)
 
-        val profileId = arguments?.getLong("profile_id")
-        if (profileId != null) {
-            val homeInfo: Home = homeList().find { it.home_id == profileId }!!
-            _homeBinding!!.homeTextView.text = homeInfo.home_description
-        }
         return homeBinding.root
     }
 
@@ -49,13 +43,17 @@ class HomeFragment: Fragment(), OnMapReadyCallback{
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(
+        val sydneyLatLng = LatLng(-34.0, 151.0)
+        val sydney = googleMap.addMarker(
             MarkerOptions()
-            .position(sydney)
-            .title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+                .position(sydneyLatLng))
+
+        googleMap.setInfoWindowAdapter(
+            HomeInfoWindowAdapter(
+                infoWindowView = layoutInflater.inflate(R.layout.home_info_window, null),
+            )
+        )
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydneyLatLng))
     }
     override fun onStart() {
         super.onStart()

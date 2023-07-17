@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--  common  -->
+    <!--  dp  -->
+        <!--  common  -->
     <dimen name="common_margin">10dp</dimen>
-    <!--  navigation bar  -->
+    <dimen name="main_margin">20dp</dimen>
+    <dimen name="sub_margin">5dp</dimen>
+        <!--  navigation bar  -->
     <dimen name="nav_height">60dp</dimen>
     <dimen name="toolbar_title_size">180dp</dimen>
+
+    <!--  sp  -->
+        <!--  font  -->
+    <dimen name="title_size">24sp</dimen>
+    <dimen name="basic_size">18sp</dimen>
+    <dimen name="sub_size">12sp</dimen>
 </resources>
