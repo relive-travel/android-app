@@ -20,5 +20,7 @@
     <string name="ex_calendar_place">서면 밀면</string>
     <string name="ex_calendar_address">부산 부산진구</string>
     <string name="ex_calendar_review">도착했는데 관광명소라기 보단, 노숙자의 성지같았다. 너무 많았음.\n몰상식한 도시로 보였음. 길에서는 담배를 아무렇지 않게 피고, 길거리는 더러움으로 가득찼으며, 노인이 많아 자기중심적인 사고에 갇혀사는것 같았음</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

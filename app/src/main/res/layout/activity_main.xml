@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/interaction_fragment"
+            android:id="@+id/main_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="@dimen/common_margin"

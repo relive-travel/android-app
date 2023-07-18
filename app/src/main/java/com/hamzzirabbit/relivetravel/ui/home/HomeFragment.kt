@@ -5,20 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.hamzzirabbit.relivetravel.R
 import com.hamzzirabbit.relivetravel.databinding.FragmentHomeBinding
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.MapFragment
+import com.naver.maps.map.NaverMap
+import com.naver.maps.map.NaverMapOptions
+import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.overlay.Marker
 
-class HomeFragment: Fragment(), OnMapReadyCallback{
+class HomeFragment: Fragment(), OnMapReadyCallback {
     private var _homeBinding: FragmentHomeBinding? = null
     private val homeBinding get() = _homeBinding!!
 
-    private lateinit var googleMapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +31,12 @@ class HomeFragment: Fragment(), OnMapReadyCallback{
     ): View? {
         _homeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        googleMapView = _homeBinding?.homeGoogleMapView as MapView
-        googleMapView.onCreate(savedInstanceState)
-        googleMapView.getMapAsync(this)
+        val naverMapFragment = childFragmentManager.findFragmentById(R.id.map) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                childFragmentManager.beginTransaction().add(R.id.map, it).commit()
+            }
+
+        naverMapFragment.getMapAsync(this)
 
         return homeBinding.root
     }
@@ -42,46 +45,17 @@ class HomeFragment: Fragment(), OnMapReadyCallback{
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        val sydneyLatLng = LatLng(-34.0, 151.0)
-        val sydney = googleMap.addMarker(
-            MarkerOptions()
-                .position(sydneyLatLng))
+    override fun onMapReady(naverMap: NaverMap) {
+        val options = NaverMapOptions()
+            .camera(CameraPosition(LatLng(37.566, 126.978),  10.0))  // 카메라 위치 (위도,경도,줌)
+            .mapType(NaverMap.MapType.Basic)    //지도 유형
+            .enabledLayerGroups(NaverMap.LAYER_GROUP_BUILDING)  //빌딩 표시
 
-        googleMap.setInfoWindowAdapter(
-            HomeInfoWindowAdapter(
-                infoWindowView = layoutInflater.inflate(R.layout.home_info_window, null),
-            )
-        )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydneyLatLng))
-    }
-    override fun onStart() {
-        super.onStart()
-        googleMapView.onStart()
+        MapFragment.newInstance(options)
+
+        val marker = Marker()
+        marker.position = LatLng(37.566, 126.978)
+        marker.map = naverMap
     }
 
-    override fun onStop() {
-        super.onStop()
-        googleMapView.onStop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        googleMapView.onResume()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        googleMapView.onPause()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        googleMapView.onLowMemory()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        googleMapView.onDestroy()
-    }
 }

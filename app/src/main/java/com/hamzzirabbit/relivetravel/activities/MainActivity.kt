@@ -1,17 +1,13 @@
 package com.hamzzirabbit.relivetravel.activities
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hamzzirabbit.relivetravel.R
@@ -67,19 +63,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         /*----- bottom navigation -----*/
-        supportFragmentManager.beginTransaction().add(R.id.interaction_fragment, HomeFragment(), "home").commit()
+        supportFragmentManager.beginTransaction().add(R.id.main_fragment_container, HomeFragment(), "home").commit()
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.bt_nav_home -> {
-                    replaceFragment(R.id.interaction_fragment, HomeFragment(), "home")
+                    replaceFragment(R.id.main_fragment_container, HomeFragment(), "home")
                     true
                 }
                 R.id.bt_nav_calendar -> {
-                    replaceFragment(R.id.interaction_fragment, CalendarFragment(), "calendar")
+                    replaceFragment(R.id.main_fragment_container, CalendarFragment(), "calendar")
                     true
                 }
                 R.id.bt_nav_feed -> {
-                    replaceFragment(R.id.interaction_fragment, FeedFragment(), "feed")
+                    replaceFragment(R.id.main_fragment_container, FeedFragment(), "feed")
                     true
                 }
                 R.id.bt_nav_add_travel -> {
@@ -106,17 +102,17 @@ class MainActivity : AppCompatActivity() {
             R.id.bt_nav_home -> {
                 val homeFragment = HomeFragment()
                 homeFragment.arguments = bundle
-                replaceFragment(R.id.interaction_fragment, homeFragment, "home")
+                replaceFragment(R.id.main_fragment_container, homeFragment, "home")
             }
             R.id.bt_nav_calendar -> {
                 val calendarFragment = CalendarFragment()
                 calendarFragment.arguments = bundle
-                replaceFragment(R.id.interaction_fragment, calendarFragment, "calendar")
+                replaceFragment(R.id.main_fragment_container, calendarFragment, "calendar")
             }
             R.id.bt_nav_feed -> {
                 val feedFragment = FeedFragment()
                 feedFragment.arguments = bundle
-                replaceFragment(R.id.interaction_fragment, feedFragment, "feed")
+                replaceFragment(R.id.main_fragment_container, feedFragment, "feed")
             }
         }
     }
