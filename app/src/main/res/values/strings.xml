@@ -4,6 +4,8 @@
     <string name="description_logo">Relive Travel 로고</string>
     <string name="description_google_map">구글 지도</string>
     <string name="description_example_calendar_image">장소의 이미지</string>
+    <string name="description_info_window_prev_button">이전 장소 버튼</string>
+    <string name="description_info_window_next_button">다음 장소 버튼</string>
     <!--  button_name  -->
     <string name="bt_nav_home">홈</string>
     <string name="bt_nav_calendar">일정</string>

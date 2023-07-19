@@ -8,6 +8,10 @@
         <!--  navigation bar  -->
     <dimen name="nav_height">60dp</dimen>
     <dimen name="toolbar_title_size">180dp</dimen>
+        <!--    layout    -->
+    <dimen name="info_window_layout">275dp</dimen>
+    <dimen name="info_window_buttom_width">30dp</dimen>
+    <dimen name="info_window_button_height">150dp</dimen>
 
     <!--  sp  -->
         <!--  font  -->
