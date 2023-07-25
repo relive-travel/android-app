@@ -1,7 +1,5 @@
 package com.hamzzirabbit.relivetravel.datas.home
 
-import android.content.res.Resources
-
 fun homeList(): List<Home> {
     return listOf(
         Home(

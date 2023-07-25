@@ -6,6 +6,9 @@
     <string name="description_example_calendar_image">장소의 이미지</string>
     <string name="description_info_window_prev_button">이전 장소 버튼</string>
     <string name="description_info_window_next_button">다음 장소 버튼</string>
+    <string name="description_naver_map_widget_calendar_list_button">일정 리스트 버튼</string>
+    <string name="description_naver_map_widget_recently_calendar_button">최근 일정 버튼</string>
+    <string name="description_naver_map_widget_now_place_button">현재 위치 버튼</string>
     <!--  button_name  -->
     <string name="bt_nav_home">홈</string>
     <string name="bt_nav_calendar">일정</string>

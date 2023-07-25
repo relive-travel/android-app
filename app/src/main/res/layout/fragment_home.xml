@@ -1,13 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_container_home"
     android:name="home"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/naver_map"
+        android:id="@+id/home_naver_map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/home_naver_map_widget_controller"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/common_margin"
+        android:orientation="vertical"
+        android:weightSum="15"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/home_naver_map_widget_calendar_list"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            android:layout_weight="1.25"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button_circle_outline"
+            android:contentDescription="@string/description_naver_map_widget_calendar_list_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/calendar_list" />
+
+        <ImageButton
+            android:id="@+id/home_naver_map_widget_recently"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            android:layout_weight="1.25"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button_circle_outline"
+            android:contentDescription="@string/description_naver_map_widget_recently_calendar_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/recently_calendar" />
+
+        <ImageButton
+            android:id="@+id/home_naver_map_widget_now_place"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="start"
+            android:layout_weight="1.25"
+            android:layout_marginBottom="@dimen/common_margin"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button_circle_outline"
+            android:contentDescription="@string/description_naver_map_widget_now_place_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/now_place" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_naver_map_info_window_controller"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="10"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/home_info_window_prev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_weight="1.25"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button_circle_main_color_outline"
+            android:contentDescription="@string/description_info_window_prev_button"
+            android:scaleType="fitCenter"
+            android:src="@drawable/prev" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="7.5"/>
+
+        <ImageButton
+            android:id="@+id/home_info_window_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:layout_gravity="end"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button_circle_main_color_outline"
+            android:scaleType="fitCenter"
+            android:src="@drawable/next"
+            android:contentDescription="@string/description_info_window_prev_button"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
