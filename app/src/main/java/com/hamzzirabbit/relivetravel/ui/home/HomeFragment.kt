@@ -1,5 +1,6 @@
 package com.hamzzirabbit.relivetravel.ui.home
 
+import android.graphics.Color
 import android.graphics.PointF
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -23,6 +24,7 @@ import com.naver.maps.map.NaverMapOptions
 import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.InfoWindow
+import com.naver.maps.map.overlay.PathOverlay
 
 class HomeFragment: Fragment(), OnMapReadyCallback {
     private var _homeBinding: FragmentHomeBinding? = null
@@ -35,7 +37,7 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
     private var naverMapController: NaverMap? = null
 
     private lateinit var exMarkers: List<ExMarker>
-    private lateinit var markerSelected: ExMarker
+    private var markerSelected: ExMarker? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,12 +65,14 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         _homeBinding!!.homeInfoWindowPrev.setOnClickListener {
             val prevMarker = exMarkers.find {
-                it.marker_order == markerSelected.marker_order - 1 }
+                it.marker_order == (markerSelected?.marker_order?.minus(1) ?: -1)
+            }
             prevMarker?.marker_marker?.performClick()
         }
         _homeBinding!!.homeInfoWindowNext.setOnClickListener {
             val nextMarker = exMarkers.find {
-                it.marker_order == markerSelected.marker_order + 1 }
+                it.marker_order == (markerSelected?.marker_order?.plus(1) ?: -1)
+            }
             nextMarker?.marker_marker?.performClick()
         }
     }
@@ -103,9 +107,15 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
                     .animate(CameraAnimation.Easing)
                     .pivot(PointF(0.5f, 0.85f))
                 naverMapController!!.moveCamera(cameraUpdate)
+
                 infoWindowContoroller.isVisible = true
                 infoWindow.open(marker)
+
+                if (exMarker.calendar_id != markerSelected?.calendar_id) {
+                    setMarkerPath(exMarker.calendar_id)
+                }
                 markerSelected = exMarker
+
                 true
             }
             exMarker.marker_marker = marker
@@ -119,6 +129,16 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         // 카메라 이동: 서울대입구역 2호선 37.4812845080678 126.952713197762
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4812845080678, 126.952713197762))
         naverMapController!!.moveCamera(cameraUpdate)
+    }
+
+    private fun setMarkerPath(calendar_id: Long) {
+        val path = PathOverlay()
+        val markerList: List<LatLng> = exMarkers.filter { it.calendar_id == calendar_id }.sortedBy { it.marker_order }.map { it.marker_latLng }
+        path.coords = markerList
+        path.color = Color.parseColor("#EB898E")
+        path.width = 15
+        path.outlineWidth = 0
+        path.map = naverMapController
     }
 
 }
