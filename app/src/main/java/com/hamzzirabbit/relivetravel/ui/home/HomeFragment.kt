@@ -38,6 +38,7 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
 
     private lateinit var exMarkers: List<ExMarker>
     private var markerSelected: ExMarker? = null
+    private lateinit var markerPath: PathOverlay
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +48,7 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
                 childFragmentManager.beginTransaction().add(R.id.home_naver_map, it).commit()
             }
         exMarkers = markerList() as List<ExMarker>
+        markerPath = PathOverlay()
 
         naverMapFragment.getMapAsync(this)
     }
@@ -90,6 +92,10 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         uiSettings.isZoomControlEnabled = false
 
         setMarkers()
+
+        // ExcetionCode : 카메라 이동, 서울대입구역 2호선 37.4812845080678 126.952713197762
+        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4812845080678, 126.952713197762))
+        naverMapController!!.moveCamera(cameraUpdate)
     }
     private fun setMarkers() {
         val infoWindow = InfoWindow()
@@ -98,14 +104,16 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
             layoutInflater,
         )
 
+        // set information inside marker
         for (exMarker: ExMarker in exMarkers) {
             val marker = Marker()
             marker.position = exMarker.marker_latLng
             marker.map = naverMapController
             marker.setOnClickListener {
-                val cameraUpdate = CameraUpdate.scrollTo(marker.position)
+                val cameraUpdate = CameraUpdate.scrollAndZoomTo(marker.position, 15.0)
                     .animate(CameraAnimation.Easing)
                     .pivot(PointF(0.5f, 0.85f))
+
                 naverMapController!!.moveCamera(cameraUpdate)
 
                 infoWindowContoroller.isVisible = true
@@ -122,23 +130,21 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         }
 
         naverMapController!!.setOnMapClickListener { pointF, latLng ->
+            markerPath.map = null
             infoWindowContoroller.isInvisible = true
             infoWindow.close()
         }
-
-        // 카메라 이동: 서울대입구역 2호선 37.4812845080678 126.952713197762
-        val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4812845080678, 126.952713197762))
-        naverMapController!!.moveCamera(cameraUpdate)
     }
 
     private fun setMarkerPath(calendar_id: Long) {
-        val path = PathOverlay()
-        val markerList: List<LatLng> = exMarkers.filter { it.calendar_id == calendar_id }.sortedBy { it.marker_order }.map { it.marker_latLng }
-        path.coords = markerList
-        path.color = Color.parseColor("#EB898E")
-        path.width = 15
-        path.outlineWidth = 0
-        path.map = naverMapController
-    }
+        markerPath.map = null
 
+        val markerList: List<LatLng> = exMarkers.filter { it.calendar_id == calendar_id }.sortedBy { it.marker_order }.map { it.marker_latLng }
+
+        markerPath.coords = markerList
+        markerPath.color = Color.parseColor("#EB898E")
+        markerPath.width = 15
+        markerPath.outlineWidth = 0
+        markerPath.map = naverMapController
+    }
 }
