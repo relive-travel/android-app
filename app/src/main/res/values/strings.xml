@@ -9,6 +9,7 @@
     <string name="description_naver_map_widget_calendar_list_button">일정 리스트 버튼</string>
     <string name="description_naver_map_widget_recently_calendar_button">최근 일정 버튼</string>
     <string name="description_naver_map_widget_now_place_button">현재 위치 버튼</string>
+    <string name="description_naver_map_widget_change_path">경로 보기 변경</string>
     <!--  button_name  -->
     <string name="bt_nav_home">홈</string>
     <string name="bt_nav_calendar">일정</string>

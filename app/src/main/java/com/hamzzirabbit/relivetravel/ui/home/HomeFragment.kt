@@ -30,15 +30,21 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
     private var _homeBinding: FragmentHomeBinding? = null
     private val homeBinding get() = _homeBinding!!
 
-    private val infoWindowContoroller: LinearLayout by lazy {
-        _homeBinding!!.homeNaverMapInfoWindowController
-    }
-
     private var naverMapController: NaverMap? = null
 
     private lateinit var exMarkers: List<ExMarker>
     private var markerSelected: ExMarker? = null
     private lateinit var markerPath: PathOverlay
+
+    private val infoWindowContoroller: LinearLayout by lazy {
+        _homeBinding!!.homeNaverMapInfoWindowController
+    }
+
+    private val widgetController: LinearLayout by lazy {
+        _homeBinding!!.homeNaverMapWidgetController
+    }
+
+    private var changePath: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +98,7 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         uiSettings.isZoomControlEnabled = false
 
         setMarkers()
+        setWidgets()
 
         // ExcetionCode : 카메라 이동, 서울대입구역 2호선 37.4812845080678 126.952713197762
         val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.4812845080678, 126.952713197762))
@@ -104,21 +111,27 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
             layoutInflater,
         )
 
-        // set information inside marker
+        // 마커와 관련된 모든 설정 진행
         for (exMarker: ExMarker in exMarkers) {
             val marker = Marker()
             marker.position = exMarker.marker_latLng
             marker.map = naverMapController
             marker.setOnClickListener {
+                // 카메라 이동
                 val cameraUpdate = CameraUpdate.scrollAndZoomTo(marker.position, 15.0)
                     .animate(CameraAnimation.Easing)
                     .pivot(PointF(0.5f, 0.85f))
 
                 naverMapController!!.moveCamera(cameraUpdate)
 
+                // widget(changePath), infoWindow 활성화
+                changePath = false
+                _homeBinding!!.homeNaverMapWidgetChangePath.setImageResource(R.drawable.full_path)
+                _homeBinding!!.homeNaverMapWidgetChangePath.isVisible = true
                 infoWindowContoroller.isVisible = true
                 infoWindow.open(marker)
 
+                // 관련된 모든 일정의 marker와 경로 설정
                 if (exMarker.calendar_id != markerSelected?.calendar_id) {
                     setMarkerPath(exMarker.calendar_id)
                 }
@@ -132,6 +145,7 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         naverMapController!!.setOnMapClickListener { pointF, latLng ->
             markerPath.map = null
             infoWindowContoroller.isInvisible = true
+            _homeBinding!!.homeNaverMapWidgetChangePath.isInvisible = true
             infoWindow.close()
         }
     }
@@ -146,5 +160,26 @@ class HomeFragment: Fragment(), OnMapReadyCallback {
         markerPath.width = 15
         markerPath.outlineWidth = 0
         markerPath.map = naverMapController
+    }
+
+    private fun setWidgets() {
+        _homeBinding!!.homeNaverMapWidgetCalendarList.setOnClickListener {
+
+        }
+        _homeBinding!!.homeNaverMapWidgetRecently.setOnClickListener {
+
+        }
+        _homeBinding!!.homeNaverMapWidgetNowPlace.setOnClickListener {
+
+        }
+        var changePathWidget = _homeBinding!!.homeNaverMapWidgetChangePath
+        changePathWidget.setOnClickListener {
+            if (!changePath) {
+                changePathWidget.setImageResource(R.drawable.single_path)
+            } else {
+                changePathWidget.setImageResource(R.drawable.full_path)
+            }
+            changePath = !changePath
+        }
     }
 }

@@ -15,6 +15,7 @@
         android:id="@+id/home_naver_map_widget_controller"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/common_margin"
         android:orientation="vertical"
         android:weightSum="15"
@@ -26,7 +27,6 @@
             android:id="@+id/home_naver_map_widget_calendar_list"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_gravity="start"
             android:layout_weight="1.25"
             android:layout_marginBottom="@dimen/common_margin"
             android:adjustViewBounds="true"
@@ -39,7 +39,6 @@
             android:id="@+id/home_naver_map_widget_recently"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_gravity="start"
             android:layout_weight="1.25"
             android:layout_marginBottom="@dimen/common_margin"
             android:adjustViewBounds="true"
@@ -52,7 +51,6 @@
             android:id="@+id/home_naver_map_widget_now_place"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_gravity="start"
             android:layout_weight="1.25"
             android:layout_marginBottom="@dimen/common_margin"
             android:adjustViewBounds="true"
@@ -60,6 +58,25 @@
             android:contentDescription="@string/description_naver_map_widget_now_place_button"
             android:scaleType="fitCenter"
             android:src="@drawable/now_place" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="10"/>
+
+        <ImageButton
+            android:id="@+id/home_naver_map_widget_change_path"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.25"
+            android:visibility="invisible"
+            android:layout_marginTop="@dimen/common_margin"
+            android:adjustViewBounds="true"
+            android:background="@drawable/button_circle_outline"
+            android:contentDescription="@string/description_naver_map_widget_change_path"
+            android:scaleType="fitCenter"
+            android:src="@drawable/full_path"
+            />
 
     </LinearLayout>
 
